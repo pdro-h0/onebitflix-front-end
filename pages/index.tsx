@@ -1,7 +1,8 @@
 import Head from "next/head";
-import styles from "../styles/HomeNotAuth.module.scss";
+import styles from "../styles/HomeNoAuth.module.scss";
+import { HeaderNoAuth } from "@/components/HeaderNotAuth";
 
-const HomeNotAuth = () => {
+const HomeNoAuth = () => {
   return (
     <>
       <Head>
@@ -11,10 +12,10 @@ const HomeNotAuth = () => {
 				<meta name="description" content="Tenha acesso aos melhores conteúdos sobre programação de uma forma simples e fácil."></meta>
       </Head>
       <main>
-        <h1>TESTE</h1>
+        <HeaderNoAuth />
       </main>
     </>
   );
 };
 
-export default HomeNotAuth;
+export default HomeNoAuth;
