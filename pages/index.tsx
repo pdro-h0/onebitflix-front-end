@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/HomeNoAuth.module.scss";
 import { HeaderNoAuth } from "@/components/HeaderNotAuth";
+import { PresentationSection } from "@/components/PresentationSection";
 
 const HomeNoAuth = () => {
   return (
@@ -12,7 +13,10 @@ const HomeNoAuth = () => {
 				<meta name="description" content="Tenha acesso aos melhores conteúdos sobre programação de uma forma simples e fácil."></meta>
       </Head>
       <main>
-        <HeaderNoAuth />
+        <div className={styles.sectionBackground}>
+          <HeaderNoAuth />
+          <PresentationSection />
+        </div>
       </main>
     </>
   );
