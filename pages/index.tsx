@@ -3,6 +3,7 @@ import styles from "../styles/HomeNoAuth.module.scss";
 import { HeaderNoAuth } from "@/components/HomeNoAuth/HeaderNoAuth";
 import { PresentationSection } from "@/components/HomeNoAuth/PresentationSection";
 import { CardsSection } from "@/components/HomeNoAuth/CardsSection";
+import { SlideComponent } from "@/components/common/SlideComponent";
 
 const HomeNoAuth = () => {
   return (
