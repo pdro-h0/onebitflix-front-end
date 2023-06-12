@@ -8,14 +8,14 @@ interface props {
 }
 
 export const SlideComponent = ({ course }: props) => {
-  let slideCount = 0
+  let slideCount = 0;
 
-  if(course.length > 4){
-    slideCount = 4
-  }else if(course){
-    slideCount = course.length
+  if (course.length > 4) {
+    slideCount = 4;
+  } else if (course) {
+    slideCount = course.length;
   }
-  
+
   return (
     <>
       <div className="d-flex flex-column align-items-center py-4">
@@ -41,8 +41,8 @@ export const SlideComponent = ({ course }: props) => {
                 arrows: course.length > 1 ? true : false,
                 drag: course.length > 1 ? true : false,
               },
-              300:{
-                width: 250
+              300: {
+                width: 250,
               },
             },
           }}

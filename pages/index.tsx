@@ -2,6 +2,8 @@ import { HeaderNoAuth } from "@/components/HomeNoAuth/HeaderNoAuth";
 import { PresentationSection } from "@/components/HomeNoAuth/PresentationSection";
 import { CardsSection } from "@/components/HomeNoAuth/CardsSection";
 import { SlideSection } from "@/components/HomeNoAuth/SlideSection";
+import { Footer } from "@/components/common/Footer";
+
 import { CourseType, courseService } from "@/services/courseService";
 
 import { GetStaticProps } from "next";
@@ -34,6 +36,7 @@ const HomeNoAuth = ({ course }: IndexPageProps) => {
         </div>
         <CardsSection />
         <SlideSection newestCourses={course} />
+        <Footer />
       </main>
     </>
   );
