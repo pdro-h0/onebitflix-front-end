@@ -47,13 +47,11 @@ export const SlideComponent = ({ course }: props) => {
             },
           }}
         >
-          {course?.map((item) => {
-            return (
+          {course?.map((item) => (
               <SplideSlide key={item.id}>
                 <SlideCard course={item} />
               </SplideSlide>
-            );
-          })}
+          ))}
         </Splide>
       </div>
     </>
