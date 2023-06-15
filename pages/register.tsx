@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import styles from "../styles/registerLogin.module.scss";
@@ -15,6 +15,12 @@ const Register = () => {
 
   const [toastIsOpen, setToastIsOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
+
+  useEffect(() =>{
+    if(sessionStorage.getItem("onebitflix-token")){
+      router.push("/home")
+    }
+  }, []);
 
   const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

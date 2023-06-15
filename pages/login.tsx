@@ -15,6 +15,12 @@ const Login = () => {
   const [toastIsOpen, setToastIsOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
 
+  useEffect(() =>{
+    if(sessionStorage.getItem("onebitflix-token")){
+      router.push("/home")
+    }
+  }, []);
+
   useEffect(() => {
     const registerSucess = router.query.registred;
 
