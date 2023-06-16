@@ -1,4 +1,4 @@
-import { HeaderAuth } from "@/components/common/HeaderAuth";
+import { FeaturedSession } from "@/components/HomeAuth/FeaturedSession";
 import Head from "next/head";
 
 const HomeAuth = () => {
@@ -10,7 +10,7 @@ const HomeAuth = () => {
       </Head>
 
       <main>
-        <HeaderAuth />
+      <FeaturedSession />
       </main>
     </>
   );
