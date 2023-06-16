@@ -76,7 +76,7 @@ const Login = () => {
 
           <Form className={styles.form} onSubmit={handleLogin}>
             <p className="text-center">
-              <strong>Bem-vindo(a) ao OneBitFlix!</strong>
+              <strong>Bem-vindo(a) de volta!</strong>
             </p>
 
             <FormGroup>
