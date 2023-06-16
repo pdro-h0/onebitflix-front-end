@@ -1,4 +1,5 @@
 import { FeaturedSession } from "@/components/HomeAuth/FeaturedSession";
+import { NewestCategory } from "@/components/HomeAuth/NewestCategory";
 import Head from "next/head";
 
 const HomeAuth = () => {
@@ -11,6 +12,7 @@ const HomeAuth = () => {
 
       <main>
       <FeaturedSession />
+      <NewestCategory />
       </main>
     </>
   );
