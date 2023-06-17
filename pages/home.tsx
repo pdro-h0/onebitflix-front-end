@@ -3,6 +3,7 @@ import { FeaturedCategory } from "@/components/HomeAuth/FeaturedCategory";
 import { FeaturedSession } from "@/components/HomeAuth/FeaturedSession";
 import { ListCategories } from "@/components/HomeAuth/ListCategories";
 import { NewestCategory } from "@/components/HomeAuth/NewestCategory";
+import { Footer } from "@/components/common/Footer";
 
 import Head from "next/head";
 
@@ -20,6 +21,7 @@ const HomeAuth = () => {
       <FavoriteCategory />
       <FeaturedCategory />
       <ListCategories />
+      <Footer />
       </main>
     </>
   );
