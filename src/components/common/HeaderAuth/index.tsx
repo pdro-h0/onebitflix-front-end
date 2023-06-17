@@ -19,10 +19,6 @@ export const HeaderAuth = () => {
     setModalIsOpen(false);
   };
 
-  const handleToogleModal = () => {
-    setModalIsOpen(!modalIsOpne);
-  };
-
   const router = useRouter()
 
   const handleLogout = ()=>{
