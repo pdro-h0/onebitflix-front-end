@@ -1,15 +1,25 @@
 import { Container, Form, Input } from "reactstrap";
 import Link from "next/link";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
+import { profileService } from "@/services/profileService";
 
 Modal.setAppElement("#__next");
 
 export const HeaderAuth = () => {
   const [modalIsOpne, setModalIsOpen] = useState<boolean>(false);
+  const [initials, setInitials] = useState<string>("false");
+
+  useEffect(() => {
+    profileService.fetchCurrent().then((user) => {
+      const firstNameInitial = user.firstName.slice(0, 1);
+      const lastNameInitial = user.lastName.slice(0, 1);
+      setInitials(firstNameInitial + lastNameInitial);
+    });
+  }, []);
 
   const handleOpenModal = () => {
     setModalIsOpen(true);
@@ -19,13 +29,13 @@ export const HeaderAuth = () => {
     setModalIsOpen(false);
   };
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const handleLogout = ()=>{
-    sessionStorage.clear()
+  const handleLogout = () => {
+    sessionStorage.clear();
 
-    router.push("/")
-  }
+    router.push("/");
+  };
 
   return (
     <>
@@ -54,7 +64,7 @@ export const HeaderAuth = () => {
             className={styles.searchImg}
           />
           <p className={styles.userProfile} onClick={handleOpenModal}>
-            AB
+          {initials}
           </p>
         </div>
         <Modal
@@ -67,10 +77,11 @@ export const HeaderAuth = () => {
           <Link href="/profile">
             <p className={styles.modalLink}>Meus Dados</p>
           </Link>
-          <p className={styles.modalLink} onClick={handleLogout}>Sair</p>
+          <p className={styles.modalLink} onClick={handleLogout}>
+            Sair
+          </p>
         </Modal>
       </Container>
     </>
   );
 };
- 
