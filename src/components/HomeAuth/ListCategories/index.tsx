@@ -3,6 +3,7 @@ import { CategoryType, categoriesService } from "@/services/categoriesService";
 import { ListCategoriesSlide } from "../ListCategoriesSlide";
 
 import useSWR from "swr";
+import { PageSpinner } from "@/components/common/Spinner";
 
 
 export const ListCategories = () => {
@@ -15,7 +16,7 @@ export const ListCategories = () => {
   if (!data)
     return (
       <>
-        <p>CARREGANDO...</p>
+        <PageSpinner />
       </>
     );
   return (
