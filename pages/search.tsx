@@ -6,6 +6,9 @@ import styles from "../styles/search.module.scss";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { Container } from "reactstrap";
+import { SearchCard } from "@/components/SearchCard";
+import { Footer } from "@/components/common/Footer";
 
 const Search = () => {
   const router = useRouter();
@@ -29,15 +32,26 @@ const Search = () => {
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </Head>
 
-      <main>
-        <HeaderAuth />
-        {searchResult?.map((item) => {
-          return (
-            <div key={item.id}>
-              <p>{item.name}</p>
-            </div>
-          );
-        })}
+      <main className={styles.main}>
+        <div className={styles.headerFooterBg}>
+          <HeaderAuth />
+        </div>
+
+        {searchResult.length >= 1 ? (
+          <div className={styles.searchResult}>
+            <Container className="d-flex flex-wrap justify-content-center gap-5 py-4">
+              {searchResult?.map((item) => {
+                return <SearchCard key={item.id} course={item} />;
+              })}
+            </Container>
+          </div>
+        ) : (
+          <p className={styles.noSearchText}>Nenhum resultado encontrado!</p>
+        )}
+
+        <div className={styles.headerFooterBg}>
+          <Footer />
+        </div>
       </main>
     </>
   );
