@@ -54,7 +54,7 @@ export const HeaderAuth = () => {
   return (
     <>
       <Container className={styles.nav}>
-        <Link href="/home">
+        <Link style={{textDecoration:"none"}} href="/home">
           <img
             src="/logoOnebitflix.svg"
             alt="Logo da OneBitCode"
@@ -93,7 +93,7 @@ export const HeaderAuth = () => {
           className={styles.modal}
           overlayClassName={styles.overlayModal}
         >
-          <Link href="/profile">
+          <Link style={{textDecoration:"none"}}  href="/profile">
             <p className={styles.modalLink}>Meus Dados</p>
           </Link>
           <p className={styles.modalLink} onClick={handleLogout}>

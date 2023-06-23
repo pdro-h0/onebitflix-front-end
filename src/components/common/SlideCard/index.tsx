@@ -9,7 +9,7 @@ interface props {
 export const SlideCard = ({ course }: props) => {
   return (
     <>
-      <Link href={`/course/${course.id}`}>
+      <Link style={{textDecoration:"none"}} href={`/course/${course.id}`}>
         <div className={styles.slide}>
           <img
             src={`${process.env.NEXT_PUBLIC_BASEURL}/${course.thumbnailUrl}`}
