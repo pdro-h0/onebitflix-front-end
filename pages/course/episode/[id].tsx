@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import styles from "../../../styles/episodePlayer.module.scss";
 
@@ -10,13 +10,52 @@ import { CourseType, courseService } from "@/services/courseService";
 import { PageSpinner } from "@/components/common/Spinner";
 import { Button, Container } from "reactstrap";
 import ReactPlayer from "react-player";
+import { watchEpisodeService } from "@/services/episodeService";
 
 const EpisodePlayer = () => {
   const router = useRouter();
   const episodeOrder = parseFloat(router.query.id?.toString() || "");
+  const episodeId = parseFloat(router.query.episodeid?.toString() || "");
   const courseId = router.query.courseid?.toString() || "";
 
   const [course, setCourse] = useState<CourseType>();
+
+  const [getEpisodeTime, setGetEpisodeTime] = useState<number>(0);
+  const [episodeTime, setEpisodeTime] = useState<number>(0);
+
+  const [isReady, setIsReady] = useState<boolean>(false);
+
+  const playerRef = useRef<ReactPlayer>(null);
+
+  const handleGetEpisodeTime = async () => {
+    const res = await watchEpisodeService.getWatchTime(episodeId);
+
+    if (res.data !== null) {
+      setGetEpisodeTime(res.data.seconds);
+    }
+  };
+
+  const handleSetEpisodeTime = async () => {
+    await watchEpisodeService.setWatchTime({
+      episodeId: episodeId,
+      seconds: Math.round(episodeTime),
+    });
+  };
+
+  useEffect(() => {
+    handleGetEpisodeTime();
+  }, [router]);
+
+  const handlePlayerTime = () => {
+    playerRef.current?.seekTo(getEpisodeTime);
+    setIsReady(true);
+  };
+
+  if (isReady === true) {
+    setTimeout(() => {
+      handleSetEpisodeTime();
+    }, 1000 * 3);
+  }
 
   const getCourse = async () => {
     if (typeof courseId !== "string") return;
@@ -33,14 +72,27 @@ const EpisodePlayer = () => {
   }, [courseId]);
 
   const handlePrevEpisode = () => {
-    router.push(`/course/episode/${episodeOrder - 1}?courseid=${course?.id}`);
+    router.push(
+      `/course/episode/${episodeOrder - 1}?courseid=${course?.id}&episodeid=${
+        episodeId - 1
+      }`
+    );
   };
 
   const handleNextEpisode = () => {
-    router.push(`/course/episode/${episodeOrder + 1}?courseid=${course?.id}`);
+    router.push(
+      `/course/episode/${episodeOrder + 1}?courseid=${course?.id}&episodeid=${
+        episodeId + 1
+      }`
+    );
   };
 
   if (course?.episodes == undefined) return <PageSpinner />;
+  if (episodeOrder + 1 < course.episodes.length) {
+    if (Math.round(episodeTime) === course.episodes[episodeOrder].secondsLong) {
+      handleNextEpisode();
+    }
+  }
 
   return (
     <>
@@ -70,6 +122,11 @@ const EpisodePlayer = () => {
                 course.episodes[episodeOrder].videoUrl
               }&token=${sessionStorage.getItem("onebitflix-token")}`}
               controls
+              ref={playerRef}
+              onStart={handlePlayerTime}
+              onProgress={(progress) => {
+                setEpisodeTime(progress.playedSeconds);
+              }}
             />
           )}
 
