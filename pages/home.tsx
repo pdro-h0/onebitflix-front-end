@@ -4,10 +4,28 @@ import { FeaturedSession } from "@/components/HomeAuth/FeaturedSession";
 import { ListCategories } from "@/components/HomeAuth/ListCategories";
 import { NewestCategory } from "@/components/HomeAuth/NewestCategory";
 import { Footer } from "@/components/common/Footer";
+import { PageSpinner } from "@/components/common/Spinner";
 
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 const HomeAuth = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("onebitflix-token")) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  if (loading) {
+    return <PageSpinner />;
+  }
+
   return (
     <>
       <Head>

@@ -11,10 +11,19 @@ import { PageSpinner } from "@/components/common/Spinner";
 import { EpisodeList } from "@/components/EpisodeList";
 import { Footer } from "@/components/common/Footer";
 
-const CoursePage = () => {
+  const CoursePage = () => {
   const [course, setCourse] = useState<CourseType>();
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("onebitflix-token")) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   const router = useRouter();
   const { id } = router.query;
@@ -61,6 +70,10 @@ const CoursePage = () => {
 
   if (course === undefined) return <PageSpinner />;
 
+  if (loading) {
+    return <PageSpinner />;
+  }
+
   return (
     <>
       <Head>
@@ -83,15 +96,18 @@ const CoursePage = () => {
         <Container className={styles.courseInfo}>
           <p className={styles.courseTitle}>{course?.name}</p>
           <p className={styles.courseDescription}>{course?.synopsis}</p>
-          <Button outline className={styles.courseBtn}
-          disabled={course?.episodes?.length === 0 ? true : false}>
-            ASSISTIR AGORA!
-            <img
-              src="/buttonPlay.svg"
-              alt="buttonImg"
-              className={styles.buttonImg}
-            />
-          </Button>
+            <Button
+              outline
+              className={styles.courseBtn}
+              disabled={course?.episodes?.length === 0 ? true : false}
+            >
+              ASSISTIR AGORA!
+              <img
+                src="/buttonPlay.svg"
+                alt="buttonImg"
+                className={styles.buttonImg}
+              />
+            </Button>
           <div className={styles.interactions}>
             {isLiked === false ? (
               <img
@@ -132,7 +148,11 @@ const CoursePage = () => {
             {course.episodes?.length != 0 ? (
               `${course?.episodes?.length} episódios`
             ) : (
-              <p><strong>&#x1f622; Não há episódios ainda, volte outra hora!</strong></p>
+              <p>
+                <strong>
+                  &#x1f622; Não há episódios ainda, volte outra hora!
+                </strong>
+              </p>
             )}
           </p>
           {course?.episodes?.map((episode) => (

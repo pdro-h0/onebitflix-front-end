@@ -10,7 +10,7 @@ interface props {
 export const SearchCard = ({ course }: props) => {
   return (
     <>
-      <Link href={`/course/${course.id}`}>
+      <Link style={{textDecoration:"none"}} href={`/course/${course.id}`}>
         <div className={styles.searchCard}>
           <img
             src={`${process.env.NEXT_PUBLIC_BASEURL}/${course.thumbnailUrl}`}

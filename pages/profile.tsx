@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Button, Col, Container, Row } from "reactstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import { HeaderAuth } from "@/components/common/HeaderAuth";
 import { UserForm } from "@/components/profile/User";
@@ -8,9 +9,25 @@ import { UserForm } from "@/components/profile/User";
 import styles from "../styles/profile.module.scss";
 import { Footer } from "@/components/common/Footer";
 import { PasswordForm } from "@/components/profile/Password";
+import { PageSpinner } from "@/components/common/Spinner";
 
 const UserInfo = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(true);
   const [form, setForm] = useState<string>("userForm");
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("onebitflix-token")) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  if (loading) {
+    return <PageSpinner />;
+  }
+
   return (
     <>
       <Head>

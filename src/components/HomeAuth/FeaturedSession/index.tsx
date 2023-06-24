@@ -36,7 +36,7 @@ export const FeaturedSession = () => {
               <Container className="pt-4">
                 <p className={styles.title}>{course.name}</p>
                 <p className={styles.description}>{course.synopsis}</p>
-                <Link style={{textDecoration:"none"}} href={`/course/${course.episodes}`}>
+                <Link style={{textDecoration:"none"}} href={`/course/${course.id}`}>
                   <Button outline color="light" className={styles.button}>
                     ACESSE AGORA!
                     <img
