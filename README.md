@@ -65,7 +65,7 @@ Após o primeiro passo, rode o comando no terminal para iniciar o projeto:
 
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
 
-
+`NEXT_PUBLIC_BASEURL`
 
 ---
 

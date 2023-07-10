@@ -63,7 +63,7 @@ const Register = () => {
       <Head>
         <title>Onebitflix - Registro</title>
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
-        <script src="https://jsuites.net/v4/jsuites.js"></script>
+        <script defer src="https://jsuites.net/v4/jsuites.js"></script>
       </Head>
 
       <main className={styles.main}>
